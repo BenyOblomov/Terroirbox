@@ -1,0 +1,16 @@
+.reviewCard {
+    height: 150px;
+}
+
+.container {
+    margin-top: 50px;
+}
+  
+.form-control {
+    margin-bottom: 20px;
+}
+
+
+#file_image_path {
+    display: none;
+}
