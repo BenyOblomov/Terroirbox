@@ -25,11 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_product'])) {
 
 // Traitement de la mise à jour du panier
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_basket'])) {
-    $basket_id = $_POST['basket_id'];
-    $basket_name = $_POST['basket_name'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $image_path = $_POST['image_path'];
+    $basket_id = htmlspecialchars($_POST['basket_id']);
+    $basket_name = htmlspecialchars($_POST['basket_name']);
+    $description = htmlspecialchars($_POST['description']);
+    $price = htmlspecialchars($_POST['price']);
+    $image_path = htmlspecialchars($_POST['image_path']);
 
     UpdateBasket($db, $basket_id, $basket_name, $description, $price, $image_path);
 }

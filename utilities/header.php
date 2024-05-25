@@ -15,6 +15,8 @@ session_start();
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="shortcut icon" type="image/png" href="/assets/img/autres/favicon.ico"/>
+            <link rel="manifest" href="/site.webmanifest">
             <!-- Inclusion des feuilles de style Bootstrap -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
             <!-- Inclusion des icônes Bootstrap -->
@@ -30,11 +32,11 @@ session_start();
             <meta name="keywords" content="Terroirbox, Paniers de fruits et légumes bio, Alimentation durable, A propos de TerroirBox, Connexion/Inscription, Mon Compte, Déconnexion, Paniers de fruits et légumes de saison, Commander en ligne vos fruits et légumes bio, Pour une alimentation durable" />
         </head>
         <body>
-            <div id="orijime"></div>
+            <div id="orejime"></div>
             <!-- Barre de navigation -->
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="index.php"><img src="assets/img/autres/logo.jpg" class="rounded-circle" alt=""></a>
+                    <a class="navbar-brand" href="index.php"><img src="assets/img/autres/logo.jpg" class="rounded-circle" alt="Le logo de terroirbox"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -100,7 +102,7 @@ session_start();
                             <h1 class="w-50 rounded bg-dark mx-auto mb-2" style="opacity: 0.8; font-size: 3vw;">TerroirBox</h1>
                             <p class="w-100 rounded bg-dark mx-auto mb-2" style="opacity: 0.8; font-size: 2.4vw;">Commander en ligne vos fruits et légumes bio</p>
                             <p class="w-75 rounded bg-dark mx-auto mb-2" style="opacity: 0.8; font-size: 1.5vw;">Facilement depuis votre smartphone</p>
-                            <a type="submit" class="btn btn-sm btn-success" href="connexion.php">Inscription</a>
+                            <a class="btn btn-sm btn-success" href="connexion.php">Inscription</a>
                         </div>
                     </div>
                     <div class="carousel-item">
@@ -109,7 +111,7 @@ session_start();
                             <h1 class="w-50 rounded bg-dark mx-auto mb-2" style="opacity: 0.8; font-size: 3vw;">TerroirBox</h1>
                             <p class="w-100 rounded bg-dark mx-auto mb-2" style="opacity: 0.8; font-size: 2.4vw;">Pour une alimentation durable</p>
                             <p class="w-75 rounded bg-dark mx-auto mb-2" style="opacity: 0.8; font-size: 1.5vw">Mangeons éco-responsable.</p>
-                            <a type="submit" class="btn btn-sm btn-success" href="Apropos.php">A propos de nous</a>
+                            <a class="btn btn-sm btn-success" href="Apropos.php">A propos de nous</a>
                         </div>
                     </div>
                 </div>

@@ -158,37 +158,48 @@ function registerUser($db, $firstName, $lastName, $email, $hashedPassword, $addr
 }
 
 // Fonction pour ajouter une commande
+/**
+ * Ajoute une commande dans la base de données.
+ *
+ * Cette fonction ajoute une nouvelle commande pour un utilisateur donné, enregistre les produits commandés
+ * et met à jour les quantités disponibles des produits. Elle gère également les paniers de produits et les paniers
+ * de légumes, en enregistrant les produits associés aux paniers et en mettant à jour leurs quantités.
+ *
+ * @param PDO $db Instance de la connexion à la base de données.
+ * @param int $user_id Identifiant de l'utilisateur passant la commande.
+ * @param string $order_date Date de la commande au format 'Y-m-d'.
+ * @param float $total_price Prix total de la commande.
+ * @return void
+ * @throws PDOException En cas d'erreur de base de données, une exception est levée et la transaction est annulée.
+ */
 function addOrder($db, $user_id, $order_date, $total_price) {
     try {
         $db->beginTransaction();
-        $sql = "INSERT INTO `orders`(`user_id`, `order_date`, `total_price`) 
-        VALUES (:user_id, :order_date, :total_price)";
-        $stmt = $db->prepare($sql);
         
+        $sql = "INSERT INTO `orders`(`user_id`, `order_date`, `total_price`) 
+                VALUES (:user_id, :order_date, :total_price)";
+        $stmt = $db->prepare($sql);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':order_date', $order_date);
         $stmt->bindParam(':total_price', $total_price);
-        
         $stmt->execute();
-
+        
         $order_id = $db->lastInsertId();
 
         if (isset($_SESSION['productCart']) && !empty($_SESSION['productCart'])) {
             foreach ($_SESSION['productCart'] as $product_id => $quantity) {
                 $sql = "INSERT INTO ordered_products (order_id, product_id, quantity) 
-                VALUES (:order_id, :product_id, :quantity)";
+                        VALUES (:order_id, :product_id, :quantity)";
                 $stmt = $db->prepare($sql);
-
                 $stmt->bindParam(':order_id', $order_id);
                 $stmt->bindParam(':product_id', $product_id);
                 $stmt->bindParam(':quantity', $quantity);
                 $stmt->execute();
 
                 $sql = "UPDATE products SET available_quantity = available_quantity - :quantity 
-                WHERE product_id = :product_id";
+                        WHERE product_id = :product_id";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':product_id', $product_id);
-                $quantity = $quantity;
                 $stmt->bindParam(':quantity', $quantity);
                 $stmt->execute();
             }
@@ -197,17 +208,14 @@ function addOrder($db, $user_id, $order_date, $total_price) {
         if (isset($_SESSION['basketCart']) && !empty($_SESSION['basketCart'])) {
             foreach ($_SESSION['basketCart'] as $basket_id => $quantity) {
                 $sql = "INSERT INTO ordered_baskets (order_id, basket_id, quantity) 
-                VALUES (:order_id, :basket_id, :quantity)";
+                        VALUES (:order_id, :basket_id, :quantity)";
                 $stmt = $db->prepare($sql);
-
                 $stmt->bindParam(':order_id', $order_id);
                 $stmt->bindParam(':basket_id', $basket_id);
                 $stmt->bindParam(':quantity', $quantity);
                 $stmt->execute();
 
-                $sql = "SELECT product_id, quantity 
-                FROM baskets_products 
-                WHERE basket_id = :basket_id";
+                $sql = "SELECT product_id, quantity FROM baskets_products WHERE basket_id = :basket_id";
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':basket_id', $basket_id);
                 $stmt->execute();
@@ -215,19 +223,18 @@ function addOrder($db, $user_id, $order_date, $total_price) {
                 
                 foreach ($products_in_basket as $product) {
                     $sql = "UPDATE products 
-                    SET available_quantity = available_quantity - :quantity 
-                    WHERE product_id = :product_id";
+                            SET available_quantity = available_quantity - :quantity 
+                            WHERE product_id = :product_id";
                     $stmt = $db->prepare($sql);
                     $stmt->bindParam(':product_id', $product['product_id']);
                     $quantityToUpdate = $product['quantity'] * $quantity;
                     $stmt->bindParam(':quantity', $quantityToUpdate);
-
                     $stmt->execute();
                 }
             }
         }
-        $db->commit();
 
+        $db->commit();
     } catch (PDOException $e) {
         $db->rollback();
         echo "erreur : " . $e->getMessage();

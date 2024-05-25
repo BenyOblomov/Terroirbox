@@ -8,4 +8,4 @@
 </section>
 
 <!-- Inclusion des scripts JavaScript -->
-<script src="recettes.js"></script>
+<script defer src="recettes.js"></script>

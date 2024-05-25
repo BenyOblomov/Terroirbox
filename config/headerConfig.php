@@ -1,6 +1,6 @@
 <?php
 // Je stocke le domaine de mon site
-$domaine = 'localhost:8000/';
+$domaine = 'https://www.paluch-benoit.com/';
 
 // ici je stocke mes url
 $index_page = $domaine;

@@ -112,7 +112,7 @@ include('utilities/header.php'); ?>
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="phoneNumber" class="form-label">Numéro de téléphone</label>
+                    <label for="phone_number" class="form-label">Numéro de téléphone</label>
                     <input type="tel" class="form-control" id="phone_number" name="phone_number" required>
                     <div class="invalid-feedback"></div>
                 </div>
@@ -123,7 +123,7 @@ include('utilities/header.php'); ?>
 </section>
 
 <!-- Inclusion du script JavaScript -->
-<script src="connexion.js"></script>
+<script defer src="connexion.js"></script>
 
 <!-- Inclusion du pied de page -->
 <?php include('utilities/footer.php');

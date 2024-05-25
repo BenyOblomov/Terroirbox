@@ -1,5 +1,5 @@
 <?php
-$domaine = 'localhost:8000/';
+$domaine = 'https://www.paluch-benoit.com/';
 
 $adminBaskets_page = $domaine . "admin/adminBaskets.php";
 $adminIndex_page = $domaine . "admin/adminIndex.php";

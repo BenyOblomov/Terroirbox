@@ -155,15 +155,26 @@ function findAvailableProducts($db) {
 
 // Fonction pour récupérer tous les produits disponibles sauf ceux spécifiés dans un panier
 function findAvailableProductsExcept($db, $productIdsInBasket) {
-    $excludedIds = implode(",", $productIdsInBasket);
-    $sql = "SELECT p.product_id AS id, p.product_name AS `name`, p.image_path AS `path`, p.description AS `description`, p.price AS price, p.available_quantity AS quantity 
-            FROM products p 
-            WHERE p.available_quantity > 100 
-            AND p.product_id NOT IN ($excludedIds)";
+    // Vérifier si la liste des IDs exclus n'est pas vide
+    if (!empty($productIdsInBasket)) {
+        $excludedIds = implode(",", $productIdsInBasket);
+        // Utiliser la clause NOT IN seulement si la liste n'est pas vide
+        $sql = "SELECT p.product_id AS id, p.product_name AS `name`, p.image_path AS `path`, p.description AS `description`, p.price AS price, p.available_quantity AS quantity 
+                FROM products p 
+                WHERE p.available_quantity > 100 
+                AND p.product_id NOT IN ($excludedIds)";
+    } else {
+        // Si la liste des IDs exclus est vide, simplement récupérer tous les produits disponibles
+        $sql = "SELECT p.product_id AS id, p.product_name AS `name`, p.image_path AS `path`, p.description AS `description`, p.price AS price, p.available_quantity AS quantity 
+                FROM products p 
+                WHERE p.available_quantity > 100";
+    }
+
     $requete = $db->query($sql);
     $products_available = $requete->fetchAll();
     return $products_available;
 }
+
 
 // Fonction pour récupérer les produits associés à une commande par son identifiant
 function findProductsByOrderId($db, $currentId) {

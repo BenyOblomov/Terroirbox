@@ -22,10 +22,10 @@
             ?>
         </div>
         <!-- Boutons de navigation du carrousel -->
-        <button type="button" id="prev" class="position-absolute top-50 start-0 translate-middle-y"><i class="bi bi-chevron-compact-left"></i></button>
-        <button type="button" id="next" class="position-absolute top-50 end-0 translate-middle-y"><i class="bi bi-chevron-compact-right"></i></button>
+        <button type="button" id="prev" class="btn btn-success position-absolute top-50 start-0 translate-middle-y"><i class="bi bi-chevron-compact-left"></i>Prev</button>
+        <button type="button" id="next" class="btn btn-success position-absolute top-50 end-0 translate-middle-y">Next<i class="bi bi-chevron-compact-right"></i></button>
     </div>
 </section>
 
 <!-- Inclusion du script JavaScript pour le carrousel -->
-<script src="carouselProduitsDispo.js"></script>
+<script defer src="carouselProduitsDispo.js"></script>
