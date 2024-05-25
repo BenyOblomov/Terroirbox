@@ -20,8 +20,8 @@ function sendEmail($mail, $userEmail, $subject, $body) {
         $mail->isSMTP();
         $mail->Host = 'smtp.hostinger.fr';
         $mail->SMTPAuth = true;
-        $mail->Username = 'terroirbox@paluch-benoit.com'; 
-        $mail->Password = 'terroirbox77Windwaker!';
+        $mail->Username = 'username'; 
+        $mail->Password = 'motdepasse';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
     
